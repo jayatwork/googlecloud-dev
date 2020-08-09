@@ -1,2 +1,6 @@
 runtime: go113 # or go112 for Go 1.12 runtime
+api_version: 1
+threadsafe: true
+
+default_expiration: "4d 5h"  #need to expire the cache data more frequently
 
