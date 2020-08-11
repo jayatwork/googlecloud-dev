@@ -1,0 +1,41 @@
+image: golang:latest
+
+variables:
+  REPO_NAME: github.com/jayatwork/googlecloud-dev
+
+before_script:
+  - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
+  - ln -svf $CI_PROJECT_DIR $GOPATH/src/$REPO_NAME
+  - cd $GOPATH/src/$REPO_NAME
+
+stages:
+    - test
+    - build
+#    - analysis
+    
+format:
+    stage: test
+    script:
+      - go get github.com/gorilla/mux
+      - go fmt $(go list ./... | grep -v /vendor/)
+      - go vet $(go list ./... | grep -v /vendor/)
+      - go test -race $(go list ./... | grep -v /vendor/)
+
+compile:
+    stage: build
+    script:
+      - go get github.com/gorilla/mux
+      - go build -race -ldflags "-extldflags '-static'" -o $CI_PROJECT_DIR/mybinary
+    artifacts:
+      paths:
+        - mybinary
+    only:
+    - merge_requests
+        
+#sonarqube_master_job:
+#  stage: analysis
+#  only:
+#    - master
+#  image: maven:3.3.9-jdk-8-alpine
+#  script:
+#    - mvn --batch-mode verify sonar:sonar -Dsonar.host.url=$SONAR_URL -Dsonar.login=$SONAR_LOGIN

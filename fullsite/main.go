@@ -1,44 +1,112 @@
 package main
-
+//Necessar imports for stdlib and external
 import (
-	"fmt"
-	"net/http"
-
-	"github.com/gorilla/mux"
+   "net/http"
+   "fmt"
+   "log"
+   "github.com/gorilla/mux"
+   "encoding/json"
+   "net"
+   "strings"
 )
 
-// The new router function creates the router and
-// returns it to us. We can now use this function
-// to instantiate and test the router outside of the main function
-func newRouter() *mux.Router {
-	r := mux.NewRouter()
-	r.HandleFunc("/hello", handler).Methods("GET")
+//Create a struct that holds information to be displayed in our HTML file
+type Welcome struct {
+   Name string
+   Time string
+}
 
-	// Declare the static file directory and point it to the directory we just made
-	staticFileDirectory := http.Dir("./assets/")
-	// Declare the handler, that routes requests to their respective filename.
-	// The fileserver is wrapped in the `stripPrefix` method, because we want to
-	// remove the "/assets/" prefix when looking for files.
-	// For example, if we type "/assets/index.html" in our browser, the file server
-	// will look for only "index.html" inside the directory declared above.
-	// If we did not strip the prefix, the file server would look for "./assets/assets/index.html", and yield an error
-	staticFileHandler := http.StripPrefix("/assets/", http.FileServer(staticFileDirectory))
-	// The "PathPrefix" method acts as a matcher, and matches all routes starting
-	// with "/assets/", instead of the absolute route itself
-	r.PathPrefix("/assets/").Handler(staticFileHandler).Methods("GET")
+type Article struct {
+	Id      int    `json:"Id"`
+	Title   string `json:"Title"`
+	Desc    string `json:"desc"`
+	Content string `json:"content"`
+}
 
-	r.HandleFunc("/bird", getBirdHandler).Methods("GET")
-	r.HandleFunc("/bird", createBirdHandler).Methods("POST")
-	return r
+type Articles []Article
+
+
+func homePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Welcome to the HomePage!!!! All the business is at landing /web/ ")
+	fmt.Println("Endpoint Hit: homePage")
+}
+
+func greetingPage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, World!")
+	fmt.Println("Hello, World!")
+}
+
+func returnAllArticles(w http.ResponseWriter, r *http.Request) {
+	articles := Articles{
+		Article{Title: "Hello", Desc: "Article Description", Content: "Article Content"},
+		Article{Title: "Hello 2", Desc: "Article Description", Content: "Article Content"},
+	}
+	fmt.Println("Endpoint Hit: returnAllArticles")
+
+	json.NewEncoder(w).Encode(articles)
+}
+
+func returnSingleArticle(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	key := vars["id"]
+	fmt.Fprintf(w, "Servername: "+key +" STATUS:")
+	
+	//Strip the unnecessary squileys
+	topen := strings.Replace(key, "{", "", -1)
+	tclose := strings.Replace(topen, "}", "", -1)
+	
+	//Do the tcp dialer for realtime stats 
+    conn, err := net.Dial("tcp", tclose + ":3389")
+
+        if err != nil {
+            fmt.Fprintf(w, "SERVER UNREACHABLE \n")
+        return
+        }
+
+    //Print discovery output remote < -- > local OCP orgin
+    fmt.Fprintf(w, "SERVER ALIVE \n\n")
+    fmt.Fprintf(w, "Remote Address : \n" + conn.RemoteAddr().String())
+    //Called from Openshift Paas platform address
+    fmt.Fprintf(w, "OCP caller Address :" + conn.LocalAddr().String())
+	
+	
+}
+
+func handleRequests() {
+	myRouter := mux.NewRouter().StrictSlash(true)
+	staticFileDirectory := http.Dir("./web/")
+	staticFileHandler := http.StripPrefix("/web/", http.FileServer(staticFileDirectory))
+	myRouter.PathPrefix("/web/").Handler(staticFileHandler).Methods("GET")
+	
+	//myRouter.HandleFunc("/", homePage)
+	myRouter.HandleFunc("/greeting", greetingPage)
+	myRouter.HandleFunc("/all", returnAllArticles)
+	myRouter.HandleFunc("/article/{id}", returnSingleArticle)
+	log.Fatal(http.ListenAndServe(":8080", myRouter))
 }
 
 func main() {
-	// The router is now formed by calling the `newRouter` constructor function
-	// that we defined above. The rest of the code stays the same
-	r := newRouter()
-	http.ListenAndServe(":8080", r)
-}
+   //Report status of webserver and enable handler
+   fmt.Println("Listening");
+   handleRequests()
+   
+   //Enumerate all current winhosts inventory
+   hostName := [...]string{1: "SATLRCCDLWE1033",2: "SATLRCCDLWE1005",3: "SATLADMDLWE1003",4: "SATLRCCDLAP1491",5: "tatlrccitap1130"}
+   portNum := "3389"
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+   //iterate over hosts
+   for index := range hostName {
+    conn, err := net.Dial("tcp", hostName[index] + ":" + portNum)
+
+    if err != nil {
+     fmt.Println(err)
+     return
+    }
+    //comment added to exercise the CICD
+    //Print to stdout status of server(s)
+    fmt.Printf("Connection established between %s and localhost.\n", hostName[index])
+    fmt.Printf("Remote Address : %s \n", conn.RemoteAddr().String())
+    fmt.Printf("Local Address : %s \n", conn.LocalAddr().String())
+   }
+   
 }

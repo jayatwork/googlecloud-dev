@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+         <meta charset="UTF-8">
+         
+
+      <!-- The welcome struct (shown in the main.go code) is received within the HTML and we just need to use the . operator and retrieve the information we want -->
+         <title>Team27Live</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/static/stylesheets/welcome-template.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+ 
+  <style>
+  .jumbotron {
+    background-color: #f4511e;
+    color: #fff;
+    padding: 100px 25px;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .logo-small {
+    color: #f4511e;
+    font-size: 50px;
+  }
+  .logo {
+    color: #f4511e;
+    font-size: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
+  </style>
+  
+   
+      
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="https://github.com/jayatwork/googlecloud-dev.git">team27 SOURCE (github)</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="../web/">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="news.ejs">News <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="rational.ejs">Rational</a></li>
+      <li><a href="sonarqube.ejs">Sonarqube</a></li>
+    </ul>
+  </div>
+</nav>
+  
+
+
+ <b>SonarQube (formerly Sonar)</b> is an open source platform developed by SonarSource for continuous inspection of code quality to perform automatic <br>
+ reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities on 20+ programming languages. SonarQube offers reports on <br>
+ duplicated code, coding standards, unit tests, code coverage, code complexity, comments, bugs, and security vulnerabilities.<br><br>
+
+SonarQube can record metrics history and provides evolution graphs. SonarQube's provides fully automated analysis and integration with Maven, Ant, Gradle, MSBuild<br>
+and continuous integration tools (Atlassian Bamboo, Jenkins, Hudson, etc.). <br>
+<br>
+
+<!-- retrieve status of the server -->
+<p><strong>Current Sonarqube</strong></p><br>
+        
+    <div id="id01"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "servers.json";
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+    var out = "";
+    var i;
+    
+    
+    for(i = 0; i < arr.length; i++) {
+        if (i > 2) {  <!-- determine where to drop into collection -->
+            out += '<a href="' + arr[i].url + '">' +
+            arr[i].display + '</a><br><br>';
+        }
+    }
+    document.getElementById("id01").innerHTML = out;
+}
+</script>
+
+
+
+
+<img alt="sonarqube detail" src="imgs/sonar-detail.png">
+
+<h3> Continuous Inspection </h3>
+
+<p>
+SonarQube provides the capability to not only show health of an application but also to highlight issues newly introduced. <br>With a Quality Gate in place, you can fix the leak and therefore improve code quality systematically. 
+</p>
+
+<a href="https://www.sonarqube.org/features/clean-code/"> read more </a>
+       
+   </body>
+</html>
+

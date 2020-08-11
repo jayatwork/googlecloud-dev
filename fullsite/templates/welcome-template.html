@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html>
+   <head>
+         <meta charset="UTF-8">
+         
+
+      <!-- The welcome struct (shown in the main.go code) is received within the HTML and we just need to use the . operator and retrieve the information we want -->
+         <title>Welcome {{.Name}}</title>  
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      //<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/static/stylesheets/welcome-template.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      
+  <style>
+  .jumbotron {
+    background-color: #f4511e;
+    color: #fff;
+    padding: 100px 25px;
+  }
+  .container-fluid {
+    padding: 60px 50px;
+  }
+  .bg-grey {
+    background-color: #f6f6f6;
+  }
+  .logo-small {
+    color: #f4511e;
+    font-size: 50px;
+  }
+  .logo {
+    color: #f4511e;
+    font-size: 200px;
+  }
+  @media screen and (max-width: 768px) {
+    .col-sm-4 {
+      text-align: center;
+      margin: 25px 0;
+    }
+  }
+  </style>
+   </head>
+<body>
+      
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Team27</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">News <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Page 1-1</a></li>
+          <li><a href="#">Page 1-2</a></li>
+          <li><a href="#">Page 1-3</a></li>
+        </ul>
+      </li>
+      <li><a href="#">All things 27</a></li>
+      <li><a href="#">Experimental</a></li>
+    </ul>
+  </div>
+</nav>
+  
+
+<!-- Container (Images holder) -->
+<div class="container-fluid text-center bg-grey">
+  <h2>The world of 27</h2><br>
+  <div class="row text-center">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="../static/imgs/rational.jpg
+	" alt="rational" width="400" height="300">
+        <p><strong>Machine Learning</strong></p>
+        <p></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="../static/imgs/sonar.jpg" alt="sonarqube" width="400" height="300">
+        <p><strong>Security</strong></p>
+        <p></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+	    <div class="thumbnail">
+        <img src="../static/imgs/other.jpg" alt="other" width="400" height="300">
+        <p><strong>other infra</strong></p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>
+      
+   </body>
+</html>
