@@ -65,22 +65,12 @@
   </div>
 </nav>
   
+So how is <b> team27live </b> actually maintained and made visible to the wider interwebs>?<br>
+Welp this is how.  WARNING: the following videos could bore you to death beware !!! If documentation
+is preferred go here <a href="https://github.com/jayatwork/googlecloud-dev/blob/experimental/fullsite/Readme.adoc">team27 Fullsite in GoogleCloud</a>
 
-<!-- Container (Images holder) -->
-<div class="container-fluid text-center bg-grey">
-  <h2>All things 27</h2><br>
-  <div class="row text-center">
-    <div class="col-sm-4">
-      <div class="thumbnail">
-        <a href="all27.ejs"> <img src="/web/imgs/27.png" alt="rational" width="400" height="300"> </a>
-        <p><strong>What is Team 27?</strong></p>
-        <p></p>
-      </div>
-    </div>
-    </div>
-    <div class="col-sm-4">
-	    <div class="thumbnail">
-        <p><strong>What's being worked on</strong></p><br>
+<!-- current work -->
+<p><strong>What's being worked on</strong></p><br>
         
     <div id="id01"></div>
 
@@ -100,21 +90,39 @@ xmlhttp.send();
 function myFunction(arr) {
     var out = "";
     var i;
+    
+    
     for(i = 0; i < arr.length; i++) {
-        out += '<a href="' + arr[i].url + '">' +
-        arr[i].display + '</a><br><br>';
+        if (i < 3) {  <!-- determine where to drop into collection -->
+            out += '<a href="' + arr[i].url + '">' +
+            arr[i].display + '</a><br><br>';
+        }
     }
     document.getElementById("id01").innerHTML = out;
 }
 </script>
 
 
- 
-        <p> Click above for current status </p>
-      </div>
-    </div>
-  </div>
-</div>
-      
+
+
+<img alt="rational detail" src="imgs/RLKS_rpt_topology.gif">
+
+<h3> Rational Licensing Redundant 3-server </h3>
+
+<p>
+<b>To configure redundant license servers: </b> <br><br> 
+
+    1. Install Rational License Key Server on three computers. <br>
+    2. Import a license file that you receive from IBM on each license server. <br>
+    3. Start the license servers. The sequence is important, Primary instance should be started first. <br>
+    4. Give client users the Primary, Secondary, and Tertiary (Backup) license server host names in the order that you requested the host names in the Rational® License Key Center. Users must enter the host names in their License Key Administrators (LKAD).
+    5. When shutting down a three-server redundant license server system, there is a one-minute delay before the servers shut down. lmdown shuts down all three license server systems of a set of redundant license server systems. If you need to shut down one of a set of redundant license server systems (not recommended because you are left with two points of failure), you must kill both the lmgrd and vendor daemon processes on that license server machine.
+
+</p>
+
+<a href="https://www.ibm.com/support/knowledgecenter/en/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/r_redundant_servers_win.html"> read more </a>
+
+
+
    </body>
 </html>

@@ -65,10 +65,41 @@
   </div>
 </nav>
   
-<!-- retrieve status of the server -->
+ML info
 
- <b>Latest News</b> <br>
+<!-- current work -->
+<p><strong>What's being worked on</strong></p><br>
+        
+    <div id="id01"></div>
 
-       
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "servers.json";
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        var myArr = JSON.parse(this.responseText);
+        myFunction(myArr);
+    }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+    var out = "";
+    var i;
+    
+    
+    for(i = 0; i < arr.length; i++) {
+        if (i < 3) {  <!-- determine where to drop into collection -->
+            out += '<a href="' + arr[i].url + '">' +
+            arr[i].display + '</a><br><br>';
+        }
+    }
+    document.getElementById("id01").innerHTML = out;
+}
+</script>
+
+
    </body>
 </html>

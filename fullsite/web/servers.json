@@ -1,22 +1,22 @@
 [
 {
 "display": "Portfolio Item1",
-"url": "/article/{Item1}"
+"url": "/web/article/{Item1}"
 },
 {
-"display": "Portfolio Item2",
-"url": "/article/{Item2}"
+"display": "New ubuntu host configuring",
+"url": "/web/article/newhost.ejs"
 },
 {
-"display": "Portfolio Item3",
-"url": "/article/{Item3}"
+"display": "Machine Learning getting started",
+"url": "/web/article/machineteach.ejs"
 },
 {
-"display": "Portfolio Item4",
-"url": "/article/{Item4}"
+"display": "Completely random",
+"url": "/web/article/rando.ejs"
 },
 {
-"display": "Portfolio Item5",
-"url": "/article/{Item5}"
+"display": "Dev of this site (uhh boring)",
+"url": "/web/article/team27dev.ejs"
 }
 ]
