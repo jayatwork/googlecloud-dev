@@ -11,8 +11,8 @@
 // $ gcloud app deploy
 // Services to deploy:
 
-// descriptor:      [/Users/509318/turingmac/go-gcp/fullsite/app.yaml]
-// source:          [/Users/509318/turingmac/go-gcp/fullsite]
+// descriptor:      [/turingmac/go-gcp/fullsite/app.yaml]
+// source:          [/turingmac/go-gcp/fullsite]
 // target project:  [gogohello]
 // target service:  [default]
 // target version:  [20200729t173624]

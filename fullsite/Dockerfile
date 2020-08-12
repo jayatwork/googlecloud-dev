@@ -1,1 +1,1 @@
-//placehole for future init images
+//placeholer for future init images

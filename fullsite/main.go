@@ -1,4 +1,4 @@
-package main
+gcloud package main
 //Necessar imports for stdlib and external
 import (
    "net/http"
@@ -89,24 +89,5 @@ func main() {
    //Report status of webserver and enable handler
    fmt.Println("Listening");
    handleRequests()
-   
-   //Enumerate all current winhosts inventory
-   hostName := [...]string{1: "SATLRCCDLWE1033",2: "SATLRCCDLWE1005",3: "SATLADMDLWE1003",4: "SATLRCCDLAP1491",5: "tatlrccitap1130"}
-   portNum := "3389"
-
-   //iterate over hosts
-   for index := range hostName {
-    conn, err := net.Dial("tcp", hostName[index] + ":" + portNum)
-
-    if err != nil {
-     fmt.Println(err)
-     return
-    }
-    //comment added to exercise the CICD
-    //Print to stdout status of server(s)
-    fmt.Printf("Connection established between %s and localhost.\n", hostName[index])
-    fmt.Printf("Remote Address : %s \n", conn.RemoteAddr().String())
-    fmt.Printf("Local Address : %s \n", conn.LocalAddr().String())
-   }
    
 }
