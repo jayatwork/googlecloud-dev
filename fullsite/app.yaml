@@ -1,12 +1,3 @@
 runtime: go113 # or go112 for Go 1.12 runtime
 default_expiration: '2s'  #need to expire the cache data more frequently and GLOBAL
 
-handlers:
-- url: /web/
-  static_dir: web/
-  expiration: '2s'
-
-- url: /web/article/
-  static_dir: web/article/
-  expiration: '2s'
-
