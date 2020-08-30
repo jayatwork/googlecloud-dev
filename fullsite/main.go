@@ -1,6 +1,6 @@
 package main
 
-//Necessar imports for stdlib and external
+//Necessary imports for stdlib and external
 import (
 	"encoding/json"
 	"fmt"
